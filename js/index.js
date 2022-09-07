@@ -41,26 +41,62 @@ function calcularPlazofijo() {
 
 calcularPlazofijo(); */
 
+
+//------------------------------------------------------------------------------------------------
+
+
 //BASE DE DATOS NEWSLETTER
 
-debugger
+const nuevoID = ()=> parseInt(Math.random() * 100000) //Fórmula para crear ID aleatorio
 
-const nuevoID = ()=> parseInt(Math.random() * 100000)
-
-const baseDatos = []
-
-function agregarPersona() {
-    let id = nuevoID()
-    let nombre = prompt("Ingresa tu nombre:")
-    let mail = prompt("Ingresa tu mail:")
-    const persona = {id: id, nombre: nombre, mail: mail}
-    let resultado = baseDatos.includes(mail)
-        if (resultado === false) {
-            baseDatos.push(persona)
-            console.table(baseDatos)
-        } else {
-            console.error("El mail ingresado ya se encuentra registrado en nuestra base de datos.")
-        }
+//Creación Objeto
+class persona{
+    constructor(id,nombre,apellido,edad,mail){
+        this.id=id
+        this.nombre=nombre
+        this.apellido=apellido
+        this.edad=edad
+        this.mail=mail
+    }
 }
 
-agregarPersona()
+const basePersonas= [] //Declaración Array
+
+//Creando nuevos objetos
+let persona1 = new persona(12345,"EZEQUIEL","DIEZ",29,"ezequieldiez.emd@gmail.com")
+let persona2 = new persona(23456,"FELICITAS","MONTES DE OCA",24,"montes.felicitas@gmail.com")
+let persona3 = new persona(34567,"JULIAN","ALVAREZ",22,"julian.alvarez@gmail.com")
+
+//Ingresando objetos al array
+basePersonas.push(persona1,persona2,persona3)
+
+//Muestra base de datos inicial
+console.table(basePersonas)
+
+/* //Filtro de personas con menos de 25 años
+
+let menores25 = basePersonas.filter(persona=>persona.edad <= 25)
+console.log(menores25) */
+
+//Agregar persona de manera dinámica
+function agregarPersona(){
+    let idpersonanueva= nuevoID()
+    let nombrepersonanueva= prompt("Ingrese su nombre:").toLocaleUpperCase()
+    let apellidopersonanueva= prompt("Ingrese su apellido:").toLocaleUpperCase()
+    let edadpersonanueva =Number(prompt("Ingrese su edad:"))
+    let mailpersonanueva =(prompt("Ingrese su mail")).toLocaleLowerCase()
+        const EXISTE = basePersonas.some((personas) => personas.mail == mailpersonanueva)
+            if(EXISTE == true){
+            console.error("El mail ingresado ya se encuentra en nuestra base de datos")
+            }else{
+            let personanueva = new persona(idpersonanueva, nombrepersonanueva, apellidopersonanueva,edadpersonanueva,mailpersonanueva)
+            basePersonas.push(personanueva)
+            console.table(basePersonas)
+            }
+}
+let cargarPersona = confirm("¿Desea suscribirse a nuestro Newsletter?")
+
+while(cargarPersona == true){
+    agregarPersona()
+    cargarPersona = confirm("¿Desea suscribir a otra persona?")
+}
