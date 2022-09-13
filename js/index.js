@@ -1,47 +1,4 @@
 
-/* //BIENVENIDA
-let nombre = prompt("Ingrese su nombre")
-let apellido = prompt("Ingrese su apellido")
-alert("Bienvenido/a" + " " + nombre + " " + apellido)
- */
-
-/* TABLA MULTIPLICACIóN
-
-let numero = parseInt(prompt("Ingrese un número para conocer su multiplicación:"))
-let multiplicador = parseInt(prompt("Ingrese el máximo multiplicador deseado"))
-
-for (let i = 1; i <= multiplicador; i++) {
-    let resultado = numero * i;
-    console.log (numero +" X "+ i + "="+ resultado)
-}
- */
-
-
-/* // SIMULADOR PLAZO FIJO TRADICIONAL
-
-Ingreso datos
-
-let capitalinicial = parseInt(prompt("Ingrese el capital a invertir (solo números)"))
-    console.log ("Capital Inicial: ", capitalinicial)
-let tna = 69.5/100
-    console.log ("Tasa: ", tna*100 + "%")
-let duracion = parseInt(prompt("Ingrese duración de la inversión (mayor a 30 días)"))
-    console.log ("Duración: ", duracion + " días")
-
-Calculo Plazo Fijo
-
-function calcularPlazofijo() {
-    if(capitalinicial !== " " && tna !== " " && duracion >= 30){
-    let capitalfinal = capitalinicial * (1 + tna * (duracion / 365))
-        console.log ("Intereses ganados: ", capitalfinal - capitalinicial)
-        console.log ("Capital final: ", capitalfinal)
-    } else
-        console.error ("Usted ingreso una duracion menor a 30 días")
-}
-
-calcularPlazofijo(); */
-
-
 //------------------------------------------------------------------------------------------------
 
 
@@ -73,10 +30,23 @@ basePersonas.push(persona1,persona2,persona3)
 //Muestra base de datos inicial
 console.table(basePersonas)
 
-/* //Filtro de personas con menos de 25 años
+//
+function cargarBase(){
+    let fila = ""
+        basePersonas.forEach(persona => {
+            fila = 
+                `<tr>
+                    <td>${persona.id}</td>
+                    <td>${persona.nombre}</td>
+                    <td>${persona.apellido}</td>
+                    <td>${persona.edad}</td>
+                    <td>${persona.mail}</td>
+                </tr>`
+                tabla.innerHTML += fila
+        });
+}
 
-let menores25 = basePersonas.filter(persona=>persona.edad <= 25)
-console.log(menores25) */
+cargarBase()
 
 //Agregar persona de manera dinámica
 function agregarPersona(){
@@ -87,16 +57,21 @@ function agregarPersona(){
     let mailpersonanueva =(prompt("Ingrese su mail")).toLocaleLowerCase()
         const EXISTE = basePersonas.some((personas) => personas.mail == mailpersonanueva)
             if(EXISTE == true){
-            console.error("El mail ingresado ya se encuentra en nuestra base de datos")
+            alert("El mail ingresado ya se encuentra en nuestra base de datos")
             }else{
             let personanueva = new persona(idpersonanueva, nombrepersonanueva, apellidopersonanueva,edadpersonanueva,mailpersonanueva)
             basePersonas.push(personanueva)
-            console.table(basePersonas)
+            cargarBase()
             }
 }
-let cargarPersona = confirm("¿Desea suscribirse a nuestro Newsletter?")
+function suscribirPersona(){
+    debugger
+    let suscribir = confirm("¿Desea suscribirse a nuestro Newsletter?")
+    if(suscribir == true){
+        agregarPersona()
+        }else{
+        alert("Muchas gracias!")
+    }
+} 
 
-while(cargarPersona == true){
-    agregarPersona()
-    cargarPersona = confirm("¿Desea suscribir a otra persona?")
-}
+

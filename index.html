@@ -9,10 +9,26 @@
     <script defer src="js/index.js"></script>
 </head>
 <body>
-    <h1>Curso de nivelacion JS</h1>
-    <p>Hola que tal, soy un parrafo en el documento HTML.</p>
-    <img src="./index_fotografia.png" alt="" height="500px" width="500px">
+    <h1>Base de Datos</h1>
+    <p>Listado de personas, con tabla dinámica</p>
+    <section>
+        <article>
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>NOMBRE</th>
+                        <th>APELLIDO</th>
+                        <th>EDAD</th>
+                        <th>MAIL</th>
+                    </tr>
+                </thead>
+                <tbody id="tabla">
+                </tbody> 
+            </table>
+        </article>
+    </section>
     <br>
-    <button>CODERHOUSE</button>
+    <button onclick="suscribirPersona()">SUSCRIBITE A NUESTRO NEWSLETTER!</button>
 </body>
 </html>
