@@ -33,6 +33,7 @@ console.table(basePersonas)
 //
 function cargarBase(){
     let fila = ""
+    tabla.innerHTML=""
         basePersonas.forEach(persona => {
             fila = 
                 `<tr>
@@ -74,4 +75,6 @@ function suscribirPersona(){
     }
 } 
 
+const buttonSuscribir = document.querySelector('#buttonSuscribite');
+    buttonSuscribir.addEventListener("click", suscribirPersona)
 
